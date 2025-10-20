@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>تسجيل غياب الطلبة بمدرسة آسية بنت مزاحم </title>
+<title>تسجيل غياب الطلبة بمدرسة معولة بن شمس</title>
 <style>
     body { font-family: 'Tajawal', sans-serif; background: #f4f4f4; color: #111; padding: 20px; direction: rtl; }
     table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 20px; }
@@ -19,7 +19,7 @@
 </head>
 <body>
 <div style="position: absolute; top: 10px; left: 10px; font-size: 13px; color: #555;">تصميم / سيف جمال المعولي</div>
-<h2>تسجيل غياب الطلبة بمدرسة آسية بنت مزاحم</h2>
+<h2>تسجيل غياب الطلبة بمدرسة معولة بن شمس</h2>
 <div class="controls">
 <label>اسم المعلم: <input id="teacherName" placeholder="اكتب اسم المعلم" type="text"/></label>
 <label>الصف:
@@ -63,7 +63,7 @@
 const SHEET_URLS = [
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vRpYkLDu5kwHXqoqZ9WPonUBDVrrbF3eo4hSAiuQosDnrYcrepDiSvTs6o2gBFrAQ/pub?gid=626465739&single=true&output=csv'
 ];
-const EXPORT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw-WH146HgZOv84R9Pb5e9QtXqXKDzc9pNZ2pAJu0N2mxz9HikwwvTaDsufqnMl23lK/exec';
+const EXPORT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbx_TrfJlC0wY7AqvFoeC3ons5tWoJBuB7ih1RLnvl7RBndREZSQTR-4WxpKWdkOLXGn/exec';
 const $ = selector => document.querySelector(selector);
 const state = { students: [], attendance: {} };
 
@@ -174,9 +174,9 @@ function exportToGoogleSheet() {
 
 function formatPhoneOM(raw) {
   const cleaned = raw.replace(/[^\d]/g, '');
-  if (cleaned.startsWith('968')) return cleaned;
+  if (cleaned.startsWith('968')) return '+968' + cleaned;
   if (cleaned.startsWith('0')) return '968' + cleaned.slice(1);
-  if (cleaned.length === 8) return '968' + cleaned;
+  if (cleaned.length === 8) return '+968' + cleaned;
   return '';
 }
 
