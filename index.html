@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+
+<html dir="rtl" lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تسجيل غياب الطلبة بمدرسة آسية بنت مزاحم </title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تسجيل غياب الطلبة بمدرسة آسية بنت مزاحم </title>
+<style>
     body { font-family: 'Tajawal', sans-serif; background: #f4f4f4; color: #111; padding: 20px; direction: rtl; }
     table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 20px; }
     th, td { padding: 10px; border: 1px solid #ccc; text-align: right; }
@@ -18,50 +19,46 @@
 </head>
 <body>
 <div style="position: absolute; top: 10px; left: 10px; font-size: 13px; color: #555;">تصميم / سيف جمال المعولي</div>
-
 <h2>تسجيل غياب الطلبة بمدرسة آسية بنت مزاحم</h2>
 <div class="controls">
-  <label>اسم المعلم: <input type="text" id="teacherName" placeholder="اكتب اسم المعلم"></label>
-  <label>الصف:
+<label>اسم المعلم: <input id="teacherName" placeholder="اكتب اسم المعلم" type="text"/></label>
+<label>الصف:
     <select id="gradeSelect" onchange="updateSections()">
-      <option value="">اختر</option>
-      <option value="5">الصف الخامس</option>
-      <option value="6">الصف السادس</option>
-      <option value="7">الصف السابع</option>
-      <option value="8">الصف الثامن</option>
-      <option value="9">الصف التاسع</option>
-      <option value="10">الصف العاشر</option>
-      <option value="11">الصف الحادي عشر</option>
-      <option value="12">الصف الثاني عشر</option>
-    </select>
-  </label>
-  <label>الشعبة:
+<option value="">اختر</option>
+<option value="5">الصف الخامس</option>
+<option value="6">الصف السادس</option>
+<option value="7">الصف السابع</option>
+<option value="8">الصف الثامن</option>
+<option value="9">الصف التاسع</option>
+<option value="10">الصف العاشر</option>
+<option value="11">الصف الحادي عشر</option>
+<option value="12">الصف الثاني عشر</option>
+</select>
+</label>
+<label>الشعبة:
     <select id="sectionSelect">
-      <option value="">اختر</option>
-    </select>
-  </label>
-  <button onclick="loadCSVData()">عرض الطلاب</button>
-  <button onclick="exportToGoogleSheet()">📤 إرسال إلى Google Sheets</button>
+<option value="">اختر</option>
+</select>
+</label>
+<button onclick="loadCSVData()">عرض الطلاب</button>
+<button onclick="exportToGoogleSheet()">📤 إرسال إلى Google Sheets</button>
 </div>
-
 <table>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>الاسم</th>
-      <th>الهاتف</th>
-      <th>الحالة</th>
-    </tr>
-  </thead>
-  <tbody id="studentsBody">
-    <tr><td colspan="4">بانتظار تحميل البيانات...</td></tr>
-  </tbody>
+<thead>
+<tr>
+<th>#</th>
+<th>الاسم</th>
+<th>الهاتف</th>
+<th>الحالة</th>
+</tr>
+</thead>
+<tbody id="studentsBody">
+<tr><td colspan="4">بانتظار تحميل البيانات...</td></tr>
+</tbody>
 </table>
-
 <p>
   الغائبون: <span id="absCount">0</span> — الحاضرون: <span id="presCount">0</span>
 </p>
-
 <script>
 const SHEET_URLS = [
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vRpYkLDu5kwHXqoqZ9WPonUBDVrrbF3eo4hSAiuQosDnrYcrepDiSvTs6o2gBFrAQ/pub?gid=626465739&single=true&output=csv'
@@ -200,7 +197,6 @@ function updateSections() {
   }
 }
 </script>
-
 <div style="position: fixed; bottom: 10px; left: 10px; font-size: 13px; color: #555;">تصميم / سيف جمال المعولي</div>
 </body>
 </html>
