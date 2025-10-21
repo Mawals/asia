@@ -41,7 +41,7 @@
 </select>
 </label>
 <button onclick="loadCSVData()">عرض الطلاب</button>
-<button onclick="exportToGoogleSheet()">📤 إرسال إلى Google Sheets</button>
+<button onclick="exportToGoogleSheet()">📤 إرسال إلى Google Sheets</button><button id="noAbsenceBtn" style="background-color: #f44336; color: white; margin-right: 10px; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer;" type="button">🚫 لا يوجد غياب</button>
 </div>
 <table>
 <thead>
@@ -198,5 +198,36 @@ function updateSections() {
 }
 </script>
 <div style="position: fixed; bottom: 10px; left: 10px; font-size: 13px; color: #555;">تصميم / سيف جمال المعولي</div>
-</body>
+<script>
+document.getElementById("noAbsenceBtn").addEventListener("click", function () {
+  const teacher = document.getElementById("teacherName").value.trim();
+  const grade = document.getElementById("gradeSelect").value;
+  const section = document.getElementById("sectionSelect").value;
+  if (!teacher || !grade || !section) {
+    alert("يرجى إدخال اسم المعلم واختيار الصف والشعبة أولاً.");
+    return;
+  }
+
+  const today = new Date().toLocaleDateString('ar-EG');
+  const payload = [{
+    serial: "-",
+    phone: "-",
+    name: "-",
+    message: `المعلم: ${teacher}\nالصف: ${grade}\nالشعبة: ${section}\nلا يوجد غياب في هذا الصف بتاريخ ${today}`
+  }];
+
+  fetch(EXPORT_WEBAPP_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    alert('✅ تم إرسال إشعار عدم وجود غياب بنجاح');
+    location.reload();
+  }).catch(err => {
+    alert('❌ فشل في إرسال إشعار عدم وجود غياب');
+    console.error(err);
+  });
+});
+</script></body>
 </html>
