@@ -201,8 +201,11 @@ function updateSections() {
 <script>
 document.getElementById("no-absence-btn").addEventListener("click", function () {
   const teacher = document.getElementById("teacher").value;
-  if (!teacher) {
-    alert("يرجى إدخال اسم المعلم أولاً.");
+  const grade = document.getElementById("grade").value;
+  const className = document.getElementById("class").value;
+
+  if (!teacher || !grade || !className) {
+    alert("يرجى إدخال اسم المعلم واختيار الصف والشعبة.");
     return;
   }
 
@@ -210,7 +213,7 @@ document.getElementById("no-absence-btn").addEventListener("click", function () 
     serial: "-",
     phone: "-",
     name: "-",
-    message: "المعلم: " + teacher + "\nلا يوجد غياب في هذا الصف اليوم"
+    message: "المعلم: " + teacher + "\nالصف: " + grade + "\nالشعبة: " + className + "\nلا يوجد غياب في هذا الصف اليوم"
   }];
 
   fetch("https://script.google.com/macros/s/AKfycby6oN2AGVUfJFg03Kywwl7ZHEdoLBvF4KchZLwOIt0qstuQ15u4hrXY0ANWDCOTrN5xFg/exec", {
