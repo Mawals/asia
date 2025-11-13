@@ -207,13 +207,7 @@ button:hover {
   </div>
 
 <script>
-
-const SHEET_URLS = {
-  Abs: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxuQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=0&single=true&output=csv",
-  Morning: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxuQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=1969987681&single=true&output=csv",
-  Viol: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxuQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=1138733379&single=true&output=csv"
-};
-
+const SHEET_URLS = ['https://docs.google.com/spreadsheets/d/e/2PACX-1vSjZnLB2tklle_gXAo8xK9hyut08wgJUwMgXFkG3GO0jI9zqQROJAUuhq1MONrijQ/pub?gid=441760191&single=true&output=csv'];
 const EXPORT_WEBAPP_URLS = {
   Abs: "https://script.google.com/macros/s/AKfycbwzh5_AA7MM_RijnCUgZ5_BF7JUXoBaFYqwNNOV1qPiBO6VVyPe30pqX3_7NR32Bqn3/exec",
   Viol: "https://script.google.com/macros/s/AKfycbwzh5_AA7MM_RijnCUgZ5_BF7JUXoBaFYqwNNOV1qPiBO6VVyPe30pqX3_7NR32Bqn3/exec",
@@ -266,28 +260,22 @@ async function loadCSVData(type) {
   const section = document.getElementById('sectionSelect' + type).value.trim();
   if (!grade || !section) { alert('يرجى اختيار الصف والشعبة'); return; }
 
-  
-try {
-    const res = await fetch(SHEET_URLS[type]);
-    const text = await res.text();
-    const lines = text.trim().split('
-');
+  try {
+    let combinedText = '';
+    for (const url of SHEET_URLS) {
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const text = await res.text();
+      combinedText += text.trim() + '\n';
+    }
+    const lines = combinedText.trim().split('\n');
     const students = lines.slice(1).map((line, i) => {
       const cols = line.split(',');
-      return {
-        id: i + 1,
-        phone: cols[0]?.trim() || '',
-        name: cols[1]?.trim() || '',
-        grade: cols[3]?.trim() || '',
-        section: cols[4]?.trim() || ''
-      };
+      return { id: i + 1, phone: cols[0]?.trim() || '', name: cols[1]?.trim() || '', grade: cols[3]?.trim() || '', section: cols[4]?.trim() || '' };
     }).filter(s => s.grade === grade && s.section === section);
 
     state[type].students = students;
-    if (type === 'Abs') renderAbsence(); 
-    else if (type === 'Viol') renderViolations(); 
-    else renderMorningLate();
-} catch renderAbsence(); else if (type === 'Viol') renderViolations(); else renderMorningLate();
+    if (type === 'Abs') renderAbsence(); else if (type === 'Viol') renderViolations(); else renderMorningLate();
   } catch (err) { console.error(err); alert('تعذر تحميل البيانات'); }
 }
 
