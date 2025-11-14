@@ -208,11 +208,12 @@ button:hover {
 
 <script>
 const SHEET_URLS = {
-  Master: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSjZnLB2tklle_gXAo8xK9hyut08wgJUwMgXFkG3GO0jI9zqQROJAUuhq1MONrijQ/pub?gid=441760191&single=true&output=csv",
+  Students: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSjZnLB2tklle_gXAo8xK9hyut08wgJUwMgXFkG3GO0jI9zqQROJAUuhq1MONrijQ/pub?gid=441760191&single=true&output=csv",
   Abs: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxuQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=0&single=true&output=csv",
-  Morning: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxuQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=1969987681&single=true&output=csv",
-  Viol: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxuQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=1138733379&single=true&output=csv"
+  Morning: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxqQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=1969987681&single=true&output=csv",
+  Viol: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxqQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=1138733379&single=true&output=csv"
 };
+
 const state = { Abs: {students: [], attendance: {}}, Viol: {students: [], violations: {}}, Morning: {students: [], status: {}} };
 
 
@@ -263,7 +264,7 @@ async function loadCSVData(type) {
   try {
     let combinedText = '';
     for (const url of SHEET_URLS) {
-      const res = await fetch(url);
+      const res = await fetch(SHEET_URLS.Students);
       if (!res.ok) continue;
       const text = await res.text();
       combinedText += text.trim() + '\n';
