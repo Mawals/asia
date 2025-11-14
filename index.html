@@ -207,15 +207,16 @@ button:hover {
   </div>
 
 <script>
-const SHEET_URLS = ['https://docs.google.com/spreadsheets/d/e/2PACX-1vSjZnLB2tklle_gXAo8xK9hyut08wgJUwMgXFkG3GO0jI9zqQROJAUuhq1MONrijQ/pub?gid=441760191&single=true&output=csv'];
+const SHEET_URLS = {
+  Abs: "https://docs.google.com/spreadsheets/d/1KFYYgsrui3oVc_4VprTo_1qdIa1N_RLZE9rw6mXVQqk/export?format=csv&gid=0",
+  Morning: "https://docs.google.com/spreadsheets/d/1KFYYgsrui3oVc_4VprTo_1qdIa1N_RLZE9rw6mXVQqk/export?format=csv&gid=1969987681",
+  Viol: "https://docs.google.com/spreadsheets/d/1KFYYgsrui3oVc_4VprTo_1qdIa1N_RLZE9rw6mXVQqk/export?format=csv&gid=1138733379"
+};
 const EXPORT_WEBAPP_URLS = {
   Abs: "https://script.google.com/macros/s/AKfycbysw8QJFHHi6ZU1nWceUzR-KHooxi_5SuwWHf9jKsPzCP6pyWKaRUo8dn8ELto8shQ_/exec",
   Viol: "https://script.google.com/macros/s/AKfycbysw8QJFHHi6ZU1nWceUzR-KHooxi_5SuwWHf9jKsPzCP6pyWKaRUo8dn8ELto8shQ_/exec",
   Morning: "https://script.google.com/macros/s/AKfycbysw8QJFHHi6ZU1nWceUzR-KHooxi_5SuwWHf9jKsPzCP6pyWKaRUo8dn8ELto8shQ_/exec"
 };
-DorFfMvyKCHDoO3HAE7BsQDcT4jLep9/exec"
-};
-const state = { Abs: {students: [], attendance: {}}, Viol: {students: [], violations: {}}, Morning: {students: [], status: {}} };
 
 
 function showSection(id) {
