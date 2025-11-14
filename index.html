@@ -207,13 +207,12 @@ button:hover {
   </div>
 
 <script>
-const SHEET_URLS = {
-  Students: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSjZnLB2tklle_gXAo8xK9hyut08wgJUwMgXFkG3GO0jI9zqQROJAUuhq1MONrijQ/pub?gid=441760191&single=true&output=csv",
-  Abs: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxuQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=0&single=true&output=csv",
-  Morning: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxqQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=1969987681&single=true&output=csv",
-  Viol: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSP9hyGcgGzkAP5nxqQwauN-KZrmLK4flpTM_3P-9k_qRf8g09tT9kFBz6azCBdAogXe9RIMb-LHZsm/pub?gid=1138733379&single=true&output=csv"
+const SHEET_URLS = ['https://docs.google.com/spreadsheets/d/e/2PACX-1vSjZnLB2tklle_gXAo8xK9hyut08wgJUwMgXFkG3GO0jI9zqQROJAUuhq1MONrijQ/pub?gid=441760191&single=true&output=csv'];
+const EXPORT_WEBAPP_URLS = {
+  Abs: "https://script.google.com/macros/s/AKfycbxlvgFN7fnPkuTgu8RiXlL5lIocX0YqaXOildqTV9gSAreQKDqbjjTDIfr0e6LCCCYM/exec",
+  Viol: "https://script.google.com/macros/s/AKfycbxlvgFN7fnPkuTgu8RiXlL5lIocX0YqaXOildqTV9gSAreQKDqbjjTDIfr0e6LCCCYM/exec",
+  Morning: "https://script.google.com/macros/s/AKfycbxlvgFN7fnPkuTgu8RiXlL5lIocX0YqaXOildqTV9gSAreQKDqbjjTDIfr0e6LCCCYM/exec"
 };
-
 const state = { Abs: {students: [], attendance: {}}, Viol: {students: [], violations: {}}, Morning: {students: [], status: {}} };
 
 
@@ -264,7 +263,7 @@ async function loadCSVData(type) {
   try {
     let combinedText = '';
     for (const url of SHEET_URLS) {
-      const res = await fetch(SHEET_URLS.Students);
+      const res = await fetch(url);
       if (!res.ok) continue;
       const text = await res.text();
       combinedText += text.trim() + '\n';
@@ -367,7 +366,7 @@ function sendData(rows, type) {
 
   fetch(EXPORT_WEBAPP_URLS[type], {
     method: 'POST',
-    
+    mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(rows)
   }).then(() => {
@@ -452,7 +451,7 @@ function noAbsentees() {
 
   fetch(EXPORT_WEBAPP_URLS['Abs'], {
     method: 'POST',
-    
+    mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(rows)
   }).then(() => {
