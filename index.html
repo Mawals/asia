@@ -105,7 +105,7 @@ button:hover {
     </div>
     <div class="section-content">
       <div class="controls">
-        <label>اسم المعلم: <input id="teacherNameAbs" placeholder="اكتب اسم المعلم" type="text"/></label>
+        <label>اسم المعلمة: <input id="teacherNameAbs" placeholder="اكتب اسم المعلم" type="text"/></label>
         <label>الصف:
           <select id="gradeSelectAbs" onchange="updateSections('Abs')">
             <option value="">اختر</option>
@@ -143,7 +143,7 @@ button:hover {
     </div>
     <div class="section-content">
       <div class="controls">
-        <label>اسم المعلم: <input id="teacherNameMorning" placeholder="اكتب اسم المعلم" type="text"/></label>
+        <label>اسم المعلمة: <input id="teacherNameMorning" placeholder="اكتب اسم المعلم" type="text"/></label>
         <label>الصف:
           <select id="gradeSelectMorning" onchange="updateSections('Morning')">
             <option value="">اختر</option>
@@ -179,7 +179,7 @@ button:hover {
     </div>
     <div class="section-content">
       <div class="controls">
-        <label>اسم المعلم: <input id="teacherNameViol" placeholder="اكتب اسم المعلم" type="text"/></label>
+        <label>اسم المعلمة: <input id="teacherNameViol" placeholder="اكتب اسم المعلم" type="text"/></label>
         <label>الصف:
           <select id="gradeSelectViol" onchange="updateSections('Viol')">
             <option value="">اختر</option>
@@ -329,7 +329,7 @@ function exportData(type) {
   if (type === 'Abs') {
     const absents = state.Abs.students.filter(s => state.Abs.attendance[s.id] === false);
     if (!absents.length) return alert('لا يوجد غياب لتصديره.');
-    const rows = absents.map((s, i) => ({ serial: i + 1, phone: s.phone, name: s.name, message: `ولي أمر الطالب ${s.name}، نعلمكم بغياب ابنكم عن الصف ${grade}/${section} بتاريخ ${today}. —  المعلم : ${teacher}` }));
+    const rows = absents.map((s, i) => ({ serial: i + 1, phone: s.phone, name: s.name, message: `ولي أمر الطالبة ${s.name}، نعلمكم بغياب ابنتكم عن الصف ${grade}/${section} بتاريخ ${today}. —  المعلمة : ${teacher}` }));
     sendData(rows, type);
   } 
   else if (type === 'Morning') {
@@ -340,7 +340,7 @@ function exportData(type) {
       serial: i + 1,
       phone: s.phone,
       name: s.name,
-      message: `ولي أمر الطالب ${s.name}، نعلمكم بتأخر ابنكم عن الحضور للمدرسة صباحًا بتاريخ ${today}. —  المعلم : ${teacher}`
+      message: `ولي أمر الطالبة ${s.name}، نعلمكم بتأخر ابنتكم عن الحضور للمدرسة صباحًا بتاريخ ${today}. —  المعلمة : ${teacher}`
     }));
     sendData(rows, type);
   }
@@ -348,7 +348,7 @@ function exportData(type) {
   else {
     const viols = state.Viol.students.filter(s => state.Viol.violations[s.id] && state.Viol.violations[s.id] !== '');
     if (!viols.length) return alert('لم يتم اختيار أي مخالفات.');
-    const rows = viols.map((s, i) => ({ serial: i + 1, phone: s.phone, name: s.name, message: `ولي أمر الطالب ${s.name}، تم تسجيل مخالفة: (${state.Viol.violations[s.id]}) في الصف ${grade}/${section} بتاريخ ${today}. —  المعلم : ${teacher}` }));
+    const rows = viols.map((s, i) => ({ serial: i + 1, phone: s.phone, name: s.name, message: `ولي أمر الطالب ${s.name}، تم تسجيل مخالفة: (${state.Viol.violations[s.id]}) في الصف ${grade}/${section} بتاريخ ${today}. —  المعلمة : ${teacher}` }));
     sendData(rows, type);
   }
 }
@@ -446,7 +446,7 @@ function noAbsentees() {
   const rows = [{
     name: "لا يوجد غياب",
     phone: "",
-    message: `لا يوجد غياب في الصف ${grade} / ${section} - المعلم: ${teacher}`
+    message: `لا يوجد غياب في الصف ${grade} / ${section} - المعلمة: ${teacher}`
   }];
 
   fetch(EXPORT_WEBAPP_URLS['Abs'], {
