@@ -443,7 +443,6 @@ function noAbsentees() {
   if (loadingSpan) loadingSpan.style.display = 'inline';
   if (sendBtn) sendBtn.disabled = true;
 
-  // تجنب الإرسال المتكرر - يتم إرسال مرة واحدة فقط في كل جلسة
   const message = `لا يوجد غياب في الصف ${grade} / ${section} - المعلمة: ${teacher}`;
   const rows = [{
     serial: 1,
@@ -466,7 +465,13 @@ function noAbsentees() {
       }
     }, 1500);
     if (sendBtn) sendBtn.disabled = false;
-    showSection('mainMenu');  // فقط الرجوع للرئيسية
+
+    // ✅ تفريغ الحقول بعد الإرسال
+    document.getElementById('teacherNameAbs').value = '';
+    document.getElementById('gradeSelectAbs').selectedIndex = 0;
+    document.getElementById('sectionSelectAbs').selectedIndex = 0;
+
+    showSection('mainMenu');
   }).catch(err => {
     alert('❌ فشل الإرسال');
     console.error(err);
