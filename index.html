@@ -246,7 +246,10 @@ function updateSections(type) {
   const sectionSelect = document.getElementById('sectionSelect' + type);
   sectionSelect.innerHTML = '<option value="">اختر</option>';
   let count = 3;
-  if (grade === '10') count = 4; else if (grade === '11') count = 6; else if (grade === '12') count = 5;
+  if (grade === '6') count = 4;  // ✅ أضف هذا السطر
+  else if (grade === '10') count = 4;
+  else if (grade === '11') count = 6;
+  else if (grade === '12') count = 5;
   for (let i = 1; i <= count; i++) {
     const opt = document.createElement('option');
     opt.value = i;
